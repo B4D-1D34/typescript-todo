@@ -1,5 +1,7 @@
 import * as TodoActionCreators from "./todo";
 
-export default {
+const ActionCreators = {
   ...TodoActionCreators,
 };
+
+export default ActionCreators;
