@@ -1,46 +1,32 @@
-interface FetchTodoAction {
-  type: TodoActionTypes.FETCH_TODOS;
-}
-
-interface FetchTodoSuccessAction {
-  type: TodoActionTypes.FETCH_TODOS_SUCCESS;
-  payload: Todo[];
-}
-
-interface FetchTodoFailureAction {
-  type: TodoActionTypes.FETCH_TODOS_FAILURE;
+interface ToggleTodoAction {
+  type: TodoActionTypes.TOGGLE_TODO;
   payload: string;
 }
 
-interface SetTodoPageAction {
-  type: TodoActionTypes.SET_TODO_PAGE;
-  payload: number;
+interface CreateTodoAction {
+  type: TodoActionTypes.CREATE_TODO;
+  payload: Todo;
+}
+
+interface DeleteTodoAction {
+  type: TodoActionTypes.DELETE_TODO;
+  payload: string;
 }
 
 export type Todo = {
   completed: boolean;
-  id: number;
+  id: string;
   title: string;
-  userId: number;
 };
 
-export type TodoAction =
-  | FetchTodoAction
-  | FetchTodoSuccessAction
-  | FetchTodoFailureAction
-  | SetTodoPageAction;
+export type TodoAction = CreateTodoAction | DeleteTodoAction | ToggleTodoAction;
 
 export interface TodoState {
   todos: Todo[];
-  loading: boolean;
-  error: null | string;
-  page: number;
-  limit: number;
 }
 
 export enum TodoActionTypes {
-  FETCH_TODOS = "FETCH_TODOS",
-  FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS",
-  FETCH_TODOS_FAILURE = "FETCH_TODOS_FAILURE",
-  SET_TODO_PAGE = "SET_TODO_PAGE",
+  CREATE_TODO = "CREATE_TODO",
+  DELETE_TODO = "DELETE_TODO",
+  TOGGLE_TODO = "TOGGLE_TODO",
 }

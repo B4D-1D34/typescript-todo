@@ -1,0 +1,29 @@
+.TodoInput {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  &-title {
+    width: max-content;
+  }
+
+  &-inputWrapper {
+    display: flex;
+  }
+
+  &-submit {
+    padding: 5px;
+    border-radius: 4px;
+    margin-left: 3px;
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(217, 134, 255);
+      color: white;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    flex-direction: column;
+  }
+}

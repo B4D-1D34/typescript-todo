@@ -1,11 +1,11 @@
 import { TodoAction, TodoActionTypes, TodoState } from "../../types/todo";
 
 const initialState: TodoState = {
-  todos: [],
-  page: 1,
-  error: null,
-  limit: 10,
-  loading: false,
+  todos: [
+    { id: "1", title: "something", completed: false },
+    { id: "2", title: "something", completed: false },
+    { id: "3", title: "something", completed: false },
+  ],
 };
 
 export const todoReducer = (
@@ -13,27 +13,24 @@ export const todoReducer = (
   action: TodoAction
 ): TodoState => {
   switch (action.type) {
-    case TodoActionTypes.FETCH_TODOS:
+    case TodoActionTypes.CREATE_TODO:
       return {
         ...state,
-        loading: true,
+        todos: [...state.todos, action.payload],
       };
-    case TodoActionTypes.FETCH_TODOS_SUCCESS:
+    case TodoActionTypes.DELETE_TODO:
       return {
         ...state,
-        loading: false,
-        todos: action.payload,
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
-    case TodoActionTypes.FETCH_TODOS_FAILURE:
+    case TodoActionTypes.TOGGLE_TODO:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
-      };
-    case TodoActionTypes.SET_TODO_PAGE:
-      return {
-        ...state,
-        page: action.payload,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload
+            ? { ...todo, completed: !todo.completed }
+            : todo
+        ),
       };
     default:
       return state;

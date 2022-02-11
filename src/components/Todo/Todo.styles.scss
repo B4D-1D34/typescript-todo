@@ -1,0 +1,30 @@
+.Todo-item {
+  padding: 20px;
+  justify-content: space-between;
+  display: flex;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 4px;
+  align-items: center;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    cursor: pointer;
+  }
+
+  &-completed {
+    text-decoration: line-through;
+  }
+
+  &-delete {
+    padding: 5px;
+    border-radius: 4px;
+    &:hover {
+      background-color: rgb(255, 65, 65);
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
