@@ -1,21 +1,22 @@
+import { observer } from "mobx-react-lite";
 import { FC } from "react";
-import { useActions } from "../../hooks/useActions";
 
-import "./Todo.styles.scss";
+import todoStore from "../../store/todoStore";
+import { Todo } from "../../types/todo";
 
-const Todo: FC<{ completed: boolean; id: string; title: string }> = ({
-  completed,
-  id,
-  title,
-}) => {
-  const { deleteTodo, toggleTodo } = useActions();
+import "./TodoItem.styles.scss";
+
+const TodoItem: FC<{
+  todo: Todo;
+}> = ({ todo }) => {
+  const { id, completed, title } = todo;
 
   const handleDelete = () => {
-    deleteTodo(id);
+    todoStore.deleteTodo(id);
   };
 
   const handleToggle = () => {
-    toggleTodo(id);
+    todoStore.toggleTodo(id);
   };
 
   return (
@@ -31,4 +32,4 @@ const Todo: FC<{ completed: boolean; id: string; title: string }> = ({
     </div>
   );
 };
-export default Todo;
+export default observer(TodoItem);

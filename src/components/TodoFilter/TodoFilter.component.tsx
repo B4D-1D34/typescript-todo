@@ -1,5 +1,6 @@
 import { FC, MouseEvent } from "react";
 import { capitalizeWord } from "../../utils/helperFunctions";
+
 import "./TodoFilter.styles.scss";
 
 const TodoFilter: FC<{ filterBy: string; setFilterBy: Function }> = ({
@@ -18,7 +19,7 @@ const TodoFilter: FC<{ filterBy: string; setFilterBy: Function }> = ({
       <div className="TodoFilter-optionsWrapper">
         {options.map((option, idx) => (
           <div
-            key={idx}
+            key={`${idx}__filter-option`}
             data-option={option}
             className={`TodoFilter-option ${
               filterBy === option ? "TodoFilter-option-chosen" : ""

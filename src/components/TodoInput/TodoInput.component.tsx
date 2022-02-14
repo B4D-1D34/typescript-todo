@@ -1,11 +1,12 @@
+import { observer } from "mobx-react-lite";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
-import { useActions } from "../../hooks/useActions";
 import { v4 as uuidv4 } from "uuid";
 
-import "./TodoInput.styles.scss";
-const TodoInput = () => {
-  const { createTodo } = useActions();
+import todoStore from "../../store/todoStore";
 
+import "./TodoInput.styles.scss";
+
+const TodoInput = () => {
   const [input, setInput] = useState("");
 
   const handleChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
@@ -16,8 +17,8 @@ const TodoInput = () => {
   };
 
   const handleCreate = () => {
-    if (input) {
-      createTodo({ title: input, completed: false, id: uuidv4() });
+    if (input.trim()) {
+      todoStore.createTodo({ title: input, completed: false, id: uuidv4() });
       setInput("");
     }
   };
@@ -41,4 +42,4 @@ const TodoInput = () => {
   );
 };
 
-export default TodoInput;
+export default observer(TodoInput);
