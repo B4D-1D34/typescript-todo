@@ -29,7 +29,7 @@ const config: Configuration = {
   mode: mode,
 
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build"),
     assetModuleFilename: "images/[name][ext]",
     clean: true,
   },
