@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import "./favicon.ico";
 
 ReactDOM.render(
   <React.StrictMode>
