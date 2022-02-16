@@ -81,7 +81,6 @@ const config: Configuration = {
 
   devServer: {
     static: { directory: path.join(__dirname, "dist") },
-    compress: true,
   },
 };
 
