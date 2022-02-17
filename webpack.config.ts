@@ -7,11 +7,6 @@ const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 import { Configuration } from "webpack";
 
 import "webpack-dev-server";
-// import processArguments from "webpack-dev-server/types/bin/process-arguments";
-
-// type Mode = "development" | "production" | "none";
-
-// let mode: Mode = "development";
 
 const plugins = [
   new MiniCssExtractPlugin(),
