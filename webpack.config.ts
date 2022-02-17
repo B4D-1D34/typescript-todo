@@ -7,10 +7,11 @@ const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 import { Configuration } from "webpack";
 
 import "webpack-dev-server";
+// import processArguments from "webpack-dev-server/types/bin/process-arguments";
 
-type Mode = "development" | "production" | "none";
+// type Mode = "development" | "production" | "none";
 
-let mode: Mode = "development";
+// let mode: Mode = "development";
 
 const plugins = [
   new MiniCssExtractPlugin(),
@@ -22,12 +23,9 @@ const plugins = [
   }),
 ];
 
-if (process.env.NODE_ENV === "production") mode = "production";
-else plugins.push(new ReactRefreshWebpackPlugin());
+if (process.env.NODE_ENV) plugins.push(new ReactRefreshWebpackPlugin());
 
 const config: Configuration = {
-  mode: mode,
-
   output: {
     path: path.resolve(__dirname, "build"),
     assetModuleFilename: "images/[name][ext]",
@@ -35,7 +33,9 @@ const config: Configuration = {
   },
 
   optimization: {
-    splitChunks: { chunks: "all" },
+    splitChunks: {
+      chunks: "all",
+    },
   },
 
   module: {
@@ -54,9 +54,6 @@ const config: Configuration = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: "ts-loader",
-        options: {
-          transpileOnly: true,
-        },
       },
       {
         test: /\.(s[ac]|c)ss$/i,
@@ -80,7 +77,7 @@ const config: Configuration = {
   devtool: "source-map",
 
   devServer: {
-    static: { directory: path.join(__dirname, "dist") },
+    static: { directory: path.join(__dirname, "build") },
   },
 };
 
