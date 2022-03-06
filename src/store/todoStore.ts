@@ -1,28 +1,19 @@
-import { makeAutoObservable } from "mobx";
+import { createStore, createEvent } from "effector";
 import { Todo } from "../types/todo";
 
-class TodoStore {
-  todos: Todo[] = [
-    { id: "1", title: "something", completed: false },
-    { id: "2", title: "something", completed: false },
-    { id: "3", title: "something", completed: false },
-  ];
+export const createTodo = createEvent<Todo>("create todo");
+export const deleteTodo = createEvent<string>("delete todo");
+export const toggleTodo = createEvent<string>("toggle todo");
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+const todos = createStore<Todo[]>([
+  { id: "1", title: "something", completed: false },
+  { id: "2", title: "something", completed: false },
+  { id: "3", title: "something", completed: false },
+])
+  .on(createTodo, (todos, newTodo) => [...todos, newTodo])
+  .on(deleteTodo, (todos, id) => todos.filter((t) => t.id !== id))
+  .on(toggleTodo, (todos, id) =>
+    todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+  );
 
-  createTodo(todo: Todo) {
-    this.todos.push(todo);
-  }
-  deleteTodo(id: string) {
-    this.todos = this.todos.filter((todo) => todo.id !== id);
-  }
-  toggleTodo(id: string) {
-    this.todos = this.todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-  }
-}
-
-export default new TodoStore();
+export default todos;

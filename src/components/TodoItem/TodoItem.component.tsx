@@ -1,7 +1,6 @@
-import { observer } from "mobx-react-lite";
 import { FC } from "react";
+import { deleteTodo, toggleTodo } from "../../store/todoStore";
 
-import todoStore from "../../store/todoStore";
 import { Todo } from "../../types/todo";
 
 import "./TodoItem.styles.scss";
@@ -12,11 +11,11 @@ const TodoItem: FC<{
   const { id, completed, title } = todo;
 
   const handleDelete = () => {
-    todoStore.deleteTodo(id);
+    deleteTodo(id);
   };
 
   const handleToggle = () => {
-    todoStore.toggleTodo(id);
+    toggleTodo(id);
   };
 
   return (
@@ -32,4 +31,5 @@ const TodoItem: FC<{
     </div>
   );
 };
-export default observer(TodoItem);
+
+export default TodoItem;

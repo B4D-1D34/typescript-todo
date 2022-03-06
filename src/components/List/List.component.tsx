@@ -1,12 +1,14 @@
-import { observer } from "mobx-react-lite";
+import { useStore } from "effector-react";
 import { FC } from "react";
 
-import todoStore from "../../store/todoStore";
+import $todoStore from "../../store/todoStore";
 import { getTodoFilterCb } from "../../utils/helperFunctions";
 import TodoItem from "../TodoItem/TodoItem.component";
 
 const List: FC<{ filterBy: string }> = ({ filterBy }) => {
-  const filteredTodos = todoStore.todos.filter(getTodoFilterCb(filterBy));
+  const todoStore = useStore($todoStore);
+
+  const filteredTodos = todoStore.filter(getTodoFilterCb(filterBy));
 
   return (
     <>
@@ -21,4 +23,4 @@ const List: FC<{ filterBy: string }> = ({ filterBy }) => {
   );
 };
 
-export default observer(List);
+export default List;
