@@ -1,8 +1,6 @@
-import { observer } from "mobx-react-lite";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-import todoStore from "../../store/todoStore";
+import { createTodo } from "../../store/todoStore";
 
 import "./TodoInput.styles.scss";
 
@@ -18,7 +16,7 @@ const TodoInput = () => {
 
   const handleCreate = () => {
     if (input.trim()) {
-      todoStore.createTodo({ title: input, completed: false, id: uuidv4() });
+      createTodo({ title: input, completed: false, id: uuidv4() });
       setInput("");
     }
   };
@@ -42,4 +40,4 @@ const TodoInput = () => {
   );
 };
 
-export default observer(TodoInput);
+export default TodoInput;
